@@ -109,7 +109,7 @@ app.post("/login", async (req, res) => {
         }
         const payload = { user: { id: userInfo._id } }
         // const payload = { id: userInfo._id }
-        const accessToken = jwt.sign(payload, process.env.ACCESS_TOKEN_SECRET,
+        const accessToken = jwt.sign({ id: userInfo._id, email: userInfo.email }, process.env.ACCESS_TOKEN_SECRET,
             { expiresIn: '1d' });
         return res.status(200).json({ msg: 'user logged', userInfo, accessToken })
 
