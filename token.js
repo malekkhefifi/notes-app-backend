@@ -15,7 +15,7 @@ async function authenticateToken(req, res, next) {
          });*/
         const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
         console.log("decoded", decoded);
-        const user = await User.findById(decoded.id).select('-password')
+        const user = await User.findById(decoded.user.id).select('-password')
         console.log(user)
         if (!user) {
             return res.status(401).json({ msg: 'unauth' })
